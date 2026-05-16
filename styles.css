@@ -870,6 +870,18 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
   /* Smaller on mobile so the value prop + CTA enter the first viewport. */
   max-width: 180px;
   margin: 0 auto var(--space-1);
+}
+/* Larger variant — sized so a square hero image (e.g. brothers-waving 320x320
+   on /catering) renders at roughly the same vertical extent as the home page
+   logo (which is portrait 800x1052, so 180w renders 237h). Catering needs
+   max-width matching the home logo's rendered HEIGHT to feel "matched". */
+.hero--split__art--lg {
+  max-width: 240px;
+}
+@media (min-width: 900px) {
+  .hero--split__art--lg { max-width: 440px; }
+}
+.hero--split__art {
   /* Sticker drop-shadow lifts the cutout from the section. Now that PNGs ship
      with real alpha, mix-blend-mode is gone. */
   filter: drop-shadow(0 10px 24px rgba(0,0,0,0.55));
