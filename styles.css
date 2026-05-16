@@ -539,6 +539,25 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
+
+/* Catering sample-menu variant — descriptors (not prices) get an eyebrow
+   subtitle treatment below the name. Consistent layout regardless of
+   descriptor length: no more half-stacked, half-side-by-side mix. */
+.menu-grid--meta .menu-item__head {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+.menu-grid--meta .menu-item__price {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-red);
+  white-space: normal;
+  font-variant-numeric: normal;
+}
 .menu-item__desc {
   font-size: 15px;
   color: var(--text-muted-cream);
