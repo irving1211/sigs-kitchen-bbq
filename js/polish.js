@@ -93,6 +93,77 @@
     }
   }
 
+  // ----------------- Auto-advance carousel (mobile only) -----------------
+  // Slowly drifts through the proof-grid cards left to right, ping-pongs at
+  // the ends. Pauses on user touch + when tab is hidden. Respects
+  // prefers-reduced-motion (no auto-advance).
+  var carouselMQ = window.matchMedia && window.matchMedia('(max-width: 767px)');
+  var carousels = document.querySelectorAll('.proof-grid');
+  if (carouselMQ && carousels.length && !reduced) {
+    var slideTo = function (el, target, duration) {
+      var start = el.scrollLeft;
+      var dist = target - start;
+      if (Math.abs(dist) < 1) return;
+      var t0 = performance.now();
+      var step = function (now) {
+        var t = Math.min(1, (now - t0) / duration);
+        var eased = 1 - Math.pow(1 - t, 3);
+        el.scrollLeft = start + dist * eased;
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    Array.prototype.forEach.call(carousels, function (grid) {
+      var cards = grid.querySelectorAll('.proof-card');
+      if (cards.length < 2) return;
+      var dir = 1;
+      var paused = false;
+      var resumeTimer = null;
+      var interval = null;
+      var advance = function () {
+        if (paused || !carouselMQ.matches) return;
+        var gap = parseFloat(getComputedStyle(grid).columnGap || getComputedStyle(grid).gap) || 0;
+        var cardWidth = cards[0].offsetWidth + gap;
+        var idx = Math.round(grid.scrollLeft / cardWidth);
+        var next = idx + dir;
+        if (next >= cards.length) { dir = -1; next = idx - 1; }
+        else if (next < 0) { dir = 1; next = idx + 1; }
+        slideTo(grid, next * cardWidth, 1100);
+      };
+      var start = function () {
+        if (interval) clearInterval(interval);
+        if (carouselMQ.matches) interval = setInterval(advance, 5000);
+      };
+      var stop = function () {
+        if (interval) clearInterval(interval);
+        interval = null;
+      };
+      grid.addEventListener('touchstart', function () {
+        paused = true;
+        clearTimeout(resumeTimer);
+      }, { passive: true });
+      grid.addEventListener('touchend', function () {
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(function () { paused = false; }, 5000);
+      });
+      grid.addEventListener('mouseenter', function () { paused = true; });
+      grid.addEventListener('mouseleave', function () { paused = false; });
+      document.addEventListener('visibilitychange', function () {
+        paused = document.hidden || paused;
+        if (!document.hidden) {
+          clearTimeout(resumeTimer);
+          resumeTimer = setTimeout(function () { paused = false; }, 1500);
+        }
+      });
+      if (carouselMQ.addEventListener) {
+        carouselMQ.addEventListener('change', function () {
+          if (carouselMQ.matches) start(); else stop();
+        });
+      }
+      start();
+    });
+  }
+
   // ----------------- Mobile nav toggle -----------------
   var nav = document.querySelector('.site-nav');
   var toggle = document.querySelector('.site-nav__toggle');
