@@ -881,6 +881,29 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
 @media (min-width: 900px) {
   .hero--split__art--lg { max-width: 480px; }
 }
+
+/* Tight variant — only used on catering hero where the bigger image was
+   creating too much vertical space between art and title on mobile. Scoped
+   so home hero (which Irving explicitly likes as-is) is untouched. */
+.hero--tight {
+  padding-block: var(--space-2) var(--space-4);
+}
+.hero--tight .container {
+  gap: var(--space-1);
+}
+.hero--tight .hero--split__art {
+  margin-bottom: 0;
+}
+@media (min-width: 900px) {
+  /* On desktop the layout is side-by-side, so gap is column-gap not vertical.
+     Keep the original spacing there. */
+  .hero--tight {
+    padding-block: var(--space-7) var(--space-6);
+  }
+  .hero--tight .container {
+    gap: var(--space-6);
+  }
+}
 .hero--split__art {
   /* Sticker drop-shadow lifts the cutout from the section. Now that PNGs ship
      with real alpha, mix-blend-mode is gone. */
