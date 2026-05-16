@@ -1291,21 +1291,21 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
 /* ---------- ABOUT MINI (brothers-smoker spot intro) ---------- */
 .about-mini {
   background: var(--bg-cream-deep);
-  padding-block: var(--space-4);
+  padding-block: var(--space-2);
 }
 @media (min-width: 768px) {
   .about-mini { padding-block: var(--space-7); }
 }
 .about-mini__inner {
   display: grid;
-  gap: var(--space-3);
+  gap: var(--space-1);
   grid-template-columns: 1fr;
   align-items: center;
   max-width: 980px;
   margin: 0 auto;
 }
 @media (min-width: 768px) {
-  .about-mini__inner { grid-template-columns: 300px 1fr; gap: var(--space-7); }
+  .about-mini__inner { grid-template-columns: 300px 1fr; gap: var(--space-7); row-gap: var(--space-5); }
 }
 .about-mini__art {
   max-width: 220px;
