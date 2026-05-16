@@ -516,12 +516,15 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
 }
 .menu-item__head {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: baseline;
-  gap: var(--space-3);
+  gap: var(--space-1) var(--space-2);
   margin-bottom: var(--space-1);
 }
 .menu-item__name {
+  flex: 1 1 auto;
+  min-width: 0;
   font-family: var(--font-display);
   font-size: clamp(17px, 1vw + 12px, 20px);
   text-transform: uppercase;
@@ -529,6 +532,7 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
   color: var(--text-on-cream);
 }
 .menu-item__price {
+  flex: 0 0 auto;
   font-family: var(--font-display);
   font-size: clamp(18px, 1.2vw + 12px, 22px);
   color: var(--accent-red);
