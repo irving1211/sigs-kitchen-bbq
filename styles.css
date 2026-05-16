@@ -632,6 +632,18 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
   font-size: 14px;
   margin-top: var(--space-3);
 }
+.site-footer__credit {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted-dark);
+  padding-top: var(--space-1);
+  padding-bottom: var(--space-2);
+  opacity: 0.7;
+  letter-spacing: 0.02em;
+}
+.site-footer__credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.site-footer__credit a:hover { color: var(--accent-yellow); opacity: 1; }
+
 .site-footer__legal {
   border-top: 1px solid var(--border-warm);
   margin-top: var(--space-5);
@@ -1260,11 +1272,14 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
 /* ---------- ABOUT MINI (brothers-smoker spot intro) ---------- */
 .about-mini {
   background: var(--bg-cream-deep);
-  padding-block: var(--space-7);
+  padding-block: var(--space-4);
+}
+@media (min-width: 768px) {
+  .about-mini { padding-block: var(--space-7); }
 }
 .about-mini__inner {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-3);
   grid-template-columns: 1fr;
   align-items: center;
   max-width: 980px;
@@ -1274,9 +1289,12 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
   .about-mini__inner { grid-template-columns: 300px 1fr; gap: var(--space-7); }
 }
 .about-mini__art {
-  max-width: 320px;
+  max-width: 220px;
   margin: 0 auto;
   filter: drop-shadow(0 12px 28px rgba(20,8,4,0.22));
+}
+@media (min-width: 768px) {
+  .about-mini__art { max-width: 320px; }
 }
 .about-mini__copy { text-align: center; }
 @media (min-width: 768px) { .about-mini__copy { text-align: left; } }
