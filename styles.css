@@ -886,7 +886,7 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
    creating too much vertical space between art and title on mobile. Scoped
    so home hero (which Irving explicitly likes as-is) is untouched. */
 .hero--tight {
-  padding-block: var(--space-2) var(--space-4);
+  padding-block: var(--space-1) var(--space-2);
 }
 .hero--tight .container {
   gap: var(--space-1);
