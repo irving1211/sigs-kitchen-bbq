@@ -71,7 +71,7 @@
     <div class="hero--split__copy">
       <span class="hero__tagline">We Bring the Smoke, You Bring the Appetite</span>
       <h1>BBQ Catering<br><span class="accent">MA + NH</span></h1>
-      <p class="hero__subhead">Weddings, corporate, fundraisers, festivals, backyard parties. Same-day quote. The smoker comes to you.</p>
+      <p class="hero__subhead">Weddings, corporate, fundraisers, festivals, backyard parties. Same-day reply during the week. The smoker comes to you.</p>
       <div class="btn-group">
         <a class="btn btn--primary" href="#quote">Get a Quote — Same-Day Reply</a>
         <a class="btn btn--ghost-dark" href="tel:+19789960869">(978) 996-0869</a>
@@ -263,9 +263,12 @@
     <p class="lede">Same-day reply during the week. We'll send a per-person price, a menu draft, and our travel notes.</p>
 
     <div class="catering-form-wrap">
-      <form name="catering-inquiry" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="company-field">
-        <input type="hidden" name="form-name" value="catering-inquiry">
-        <p style="display:none;"><label>Don't fill this: <input name="company-field"></label></p>
+      <form name="catering-inquiry" method="POST" action="https://formsubmit.co/Nick@SigsKitchen.com">
+        <input type="hidden" name="_subject" value="New Sig's Kitchen Catering Inquiry">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://irving1211.github.io/sigs-kitchen-bbq/thank-you.html">
+        <input type="hidden" name="_url" value="https://irving1211.github.io/sigs-kitchen-bbq/catering.html">
+        <input type="text" name="_honey" style="position:absolute;left:-9999px;" tabindex="-1" autocomplete="off">
 
         <div class="field">
           <label for="name">Your name</label>
@@ -279,7 +282,7 @@
           </div>
           <div class="field">
             <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email">
+            <input id="email" name="email" type="email" required autocomplete="email">
           </div>
         </div>
 
@@ -317,6 +320,12 @@
           <label for="notes">Anything else? (dietary notes, special requests)</label>
           <textarea id="notes" name="notes"></textarea>
         </div>
+
+        <ul class="quote-trust-list" aria-label="Inquiry expectations">
+          <li>Direct to Nick's inbox</li>
+          <li>Same-day reply weekdays</li>
+          <li>Call if your event is urgent</li>
+        </ul>
 
         <button class="btn btn--primary" type="submit" style="width:100%;">Send Inquiry — Same-Day Reply</button>
         <p class="muted" style="margin-top: var(--space-3); text-align:center; font-size:14px;">

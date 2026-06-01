@@ -917,6 +917,29 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
 }
 .hero--split .hero__tagline { display: inline-block; margin-bottom: var(--space-1); }
 .hero--split .hero__subhead { margin-bottom: var(--space-3); }
+.hero-trust-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-4) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+}
+.hero-trust-list li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 var(--space-3);
+  border-radius: 999px;
+  border: 1px solid rgba(244,180,26,0.24);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-on-dark);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
 @media (min-width: 900px) {
   .hero--split {
     padding-block: var(--space-7) var(--space-6);
@@ -929,6 +952,7 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
   .hero--split__art { order: 0; margin: 0; max-width: 340px; }
   .hero--split__copy { text-align: left; }
   .hero--split .btn-group { justify-content: flex-start; }
+  .hero-trust-list { justify-content: flex-start; }
   .hero--split h1 { max-width: 14ch; font-size: clamp(48px, 5vw + 16px, 72px); }
   .hero--split .hero__subhead { max-width: 42ch; margin-left: 0; }
 }
@@ -1301,6 +1325,29 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
   text-underline-offset: 3px;
 }
 .menu-meta-block__body a:hover { color: var(--accent-red); }
+
+.quote-trust-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-3);
+  display: grid;
+  gap: var(--space-2);
+  grid-template-columns: 1fr;
+}
+.quote-trust-list li {
+  background: var(--bg-cream-deep);
+  border-left: 4px solid var(--accent-yellow);
+  border-radius: var(--r-card);
+  color: var(--text-on-cream);
+  font-size: 14px;
+  font-weight: 600;
+  padding: var(--space-2) var(--space-3);
+}
+@media (min-width: 768px) {
+  .quote-trust-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
 /* ---------- CONTACT GRID 2-COL ---------- */
 .contact-grid-2col {
