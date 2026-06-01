@@ -164,6 +164,36 @@
     });
   }
 
+  // ----------------- Expandable proof cards -----------------
+  Array.prototype.forEach.call(document.querySelectorAll('.proof-grid--expandable .proof-card'), function (card) {
+    var quote = card.querySelector('.proof-card__quote');
+    var toggle = card.querySelector('.proof-card__toggle');
+    if (!quote || !toggle) return;
+
+    var syncToggle = function () {
+      var wasExpanded = card.classList.contains('is-expanded');
+      if (wasExpanded) card.classList.remove('is-expanded');
+      var needsToggle = quote.scrollHeight > quote.clientHeight + 4;
+      if (wasExpanded) card.classList.add('is-expanded');
+      toggle.hidden = !needsToggle;
+      if (!needsToggle) {
+        card.classList.remove('is-expanded');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.textContent = 'Show more';
+      }
+    };
+
+    toggle.hidden = false;
+    syncToggle();
+    toggle.addEventListener('click', function () {
+      var isExpanded = card.classList.toggle('is-expanded');
+      toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      toggle.textContent = isExpanded ? 'Show less' : 'Show more';
+      if (!isExpanded) syncToggle();
+    });
+    window.addEventListener('resize', syncToggle);
+  });
+
   // ----------------- Mobile nav toggle -----------------
   var nav = document.querySelector('.site-nav');
   var toggle = document.querySelector('.site-nav__toggle');

@@ -565,6 +565,15 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
   line-height: 1.5;
 }
 
+.sample-menu__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-6);
+}
+.sample-menu__cta .btn {
+  margin-inline: auto;
+}
+
 /* ---------- CATERING FORM ---------- */
 .catering-form-wrap {
   background: var(--bg-cream-deep);
@@ -612,7 +621,21 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
   grid-template-columns: 1fr;
   gap: var(--space-2);
 }
-@media (min-width: 600px) { .field--row { grid-template-columns: 1fr 1fr; gap: var(--space-3); } }
+.field--row > .field {
+  min-width: 0;
+}
+.field input[type="date"] {
+  min-width: 0;
+}
+@media (min-width: 720px) {
+  .field--row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+}
+.field--row--event {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1080px) {
+  .field--row--event { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
 /* ---------- FOOTER ---------- */
 .site-footer {
@@ -1027,6 +1050,17 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
     scrollbar-width: thin;
     scrollbar-color: rgba(0,0,0,0.18) transparent;
   }
+  .proof-grid--expandable {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: visible;
+    padding-block-end: 0;
+  }
+  .proof-grid--expandable > .proof-card {
+    flex: none;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
   .proof-grid > .proof-card {
     flex: 0 0 85%;
     min-width: 0;
@@ -1043,6 +1077,15 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
    3 cards per row -- a second row of 1-3 cards looked unbalanced. */
 @media (min-width: 768px) {
   .proof-grid > .proof-card:nth-child(n+4) { display: none; }
+}
+@media (min-width: 768px) {
+  .proof-grid--expandable {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+  .proof-grid--expandable > .proof-card:nth-child(n+4) {
+    display: flex;
+  }
 }
 
 .proof-card {
@@ -1070,6 +1113,41 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
   flex: 1;
 }
 .proof-card__quote::before { content: "\201C"; color: var(--accent-red); font-family: var(--font-display); font-size: 36px; line-height: 0; vertical-align: -8px; margin-right: 4px; }
+.proof-grid--expandable {
+  max-width: 980px;
+  margin-inline: auto;
+}
+.proof-grid--expandable .proof-card__quote {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+.proof-card.is-expanded .proof-card__quote {
+  display: block;
+  -webkit-line-clamp: unset;
+}
+.proof-card__toggle {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--space-3);
+  color: var(--accent-red);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.proof-card__toggle[hidden] {
+  display: none;
+}
 .proof-card__attribution {
   display: flex;
   align-items: center;
@@ -1336,14 +1414,31 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
 }
 .quote-trust-list li {
   background: var(--bg-cream-deep);
-  border-left: 4px solid var(--accent-yellow);
   border-radius: var(--r-card);
   color: var(--text-on-cream);
   font-size: 14px;
   font-weight: 600;
-  padding: var(--space-2) var(--space-3);
+  padding: var(--space-3) var(--space-3) var(--space-3) calc(var(--space-3) + 18px);
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(92, 60, 44, 0.16);
 }
-@media (min-width: 768px) {
+.quote-trust-list li::before {
+  content: "";
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent-yellow);
+  transform: translateY(-50%);
+}
+@media (min-width: 720px) {
+  .quote-trust-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1200px) {
   .quote-trust-list {
     grid-template-columns: repeat(3, 1fr);
   }
