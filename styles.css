@@ -134,9 +134,12 @@ section { padding-block: var(--space-7); }
   white-space: nowrap;
   display: none; /* sticky mobile-bar already exposes Call; this would compete. */
 }
-@media (min-width: 768px) { .site-header__phone { display: inline; } }
+.site-header__phone::before { content: none; }
+@media (min-width: 768px) {
+  .site-header__phone { display: inline; }
+  .site-header__phone::before { content: "📞 "; }
+}
 .site-header__phone:hover { color: var(--text-on-dark); }
-.site-header__phone::before { content: "📞 "; }
 
 /* Nav — mobile drawer < 768px, horizontal row >= 768px */
 .site-nav {
@@ -367,7 +370,12 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
   grid-template-columns: 1fr;
 }
 @media (min-width: 768px) {
-  .service-mix__grid { grid-template-columns: repeat(3, 1fr); }
+  .service-mix__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .service-mix__grid > .service-card:nth-child(3) { grid-column: 1 / -1; }
+}
+@media (min-width: 1100px) {
+  .service-mix__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .service-mix__grid > .service-card:nth-child(3) { grid-column: auto; }
 }
 .service-card {
   background: var(--bg-cream-deep);
@@ -1087,6 +1095,11 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
     display: flex;
   }
 }
+@media (min-width: 1100px) {
+  .proof-grid--home {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 
 .proof-card {
   background: var(--bg-cream-deep);
@@ -1242,6 +1255,14 @@ p { margin: 0 0 var(--space-3); max-width: 65ch; }
   margin: 0 0 var(--space-6);
 }
 @media (min-width: 768px) { .schedule--enhanced .schedule__hero { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px) and (max-width: 1099px) {
+  .schedule--enhanced .schedule__hero { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .schedule--enhanced .schedule__hero > .next-stop-card:nth-child(3) { grid-column: 1 / -1; }
+}
+@media (min-width: 1100px) {
+  .schedule--enhanced .schedule__hero { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .schedule--enhanced .schedule__hero > .next-stop-card:nth-child(3) { grid-column: auto; }
+}
 
 .next-stop-card {
   background: linear-gradient(135deg, var(--accent-red) 0%, var(--accent-red-dk) 100%);
