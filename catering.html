@@ -272,11 +272,10 @@
     <p class="lede">Same-day reply during the week. We'll send a per-person price, a menu draft, and our travel notes.</p>
 
     <div class="catering-form-wrap">
-      <form name="catering-inquiry" method="POST" action="https://formsubmit.co/Nick@SigsKitchen.com">
-        <input type="hidden" name="_subject" value="New Sig's Kitchen Catering Inquiry">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://sigskitchen.com/thank-you.html">
-        <input type="hidden" name="_url" value="https://sigskitchen.com/catering.html">
+      <div class="form-status" id="form-status" hidden aria-live="polite"></div>
+      <form name="catering-inquiry" method="POST" action="https://sigskitchen.com/api/contact">
+        <input type="hidden" name="success_url" id="success-url-input" value="https://sigskitchen.com/thank-you.html">
+        <input type="hidden" name="error_url" id="error-url-input" value="https://sigskitchen.com/catering.html">
         <input type="text" name="_honey" style="position:absolute;left:-9999px;" tabindex="-1" autocomplete="off">
 
         <div class="field">
@@ -411,5 +410,22 @@
   <a class="quote" href="#quote">Get a Quote</a>
 </nav>
 
+<script>
+  (function () {
+    var statusBox = document.getElementById('form-status');
+    if (!statusBox) return;
+
+    var status = new URLSearchParams(window.location.search).get('status');
+    var messages = {
+      validation: 'Please check the form and try again. Make sure the event date, headcount, location, and email are filled out correctly.',
+      delivery: 'The inquiry could not be delivered right now. Call or email Nick directly and try the form again in a few minutes.'
+    };
+
+    if (status && messages[status]) {
+      statusBox.textContent = messages[status];
+      statusBox.hidden = false;
+    }
+  }());
+</script>
 </body>
 </html>
