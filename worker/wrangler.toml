@@ -4,7 +4,7 @@ compatibility_date = "2026-06-02"
 account_id = "a2bec84dfc637c7affb8c591243c4f88"
 
 [vars]
-CONTACT_TO_EMAIL = "Nick@SigsKitchen.com"
+CONTACT_TO_EMAIL = "Nick@SigsKitchen.com,Ben@SigsKitchen.com"
 CONTACT_FROM_EMAIL = "Sig's Kitchen Catering <forms@forms.sigskitchen.com>"
 SUCCESS_URL = "https://sigskitchen.com/thank-you.html"
 ERROR_URL = "https://sigskitchen.com/catering.html"

@@ -17,7 +17,7 @@ type ContactPayload = {
   notes: string;
 };
 
-const DEFAULT_TO_EMAIL = "Nick@SigsKitchen.com";
+const DEFAULT_TO_EMAIL = "Nick@SigsKitchen.com,Ben@SigsKitchen.com";
 const DEFAULT_FROM_EMAIL = "Sig's Kitchen Catering <forms@forms.sigskitchen.com>";
 const DEFAULT_SUCCESS_URL = "https://sigskitchen.com/thank-you.html";
 const DEFAULT_ERROR_URL = "https://sigskitchen.com/catering.html";
@@ -111,6 +111,11 @@ async function sendViaResend(env: Env, payload: ContactPayload, request: Request
     throw new Error("Missing RESEND_API_KEY");
   }
 
+  const recipients = parseRecipientList(env.CONTACT_TO_EMAIL || DEFAULT_TO_EMAIL);
+  if (!recipients.length) {
+    throw new Error("Missing CONTACT_TO_EMAIL recipients");
+  }
+
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -119,7 +124,7 @@ async function sendViaResend(env: Env, payload: ContactPayload, request: Request
     },
     body: JSON.stringify({
       from: env.CONTACT_FROM_EMAIL || DEFAULT_FROM_EMAIL,
-      to: [env.CONTACT_TO_EMAIL || DEFAULT_TO_EMAIL],
+      to: recipients,
       reply_to: payload.email,
       subject: `New Sig's Kitchen Catering Inquiry - ${payload.name} - ${payload.eventType}`,
       html: buildHtmlEmail(payload, request),
@@ -130,6 +135,13 @@ async function sendViaResend(env: Env, payload: ContactPayload, request: Request
   if (!response.ok) {
     throw new Error(`Resend failed: ${response.status} ${await response.text()}`);
   }
+}
+
+function parseRecipientList(value: string): string[] {
+  return value
+    .split(",")
+    .map((email) => email.trim())
+    .filter(Boolean);
 }
 
 function buildHtmlEmail(payload: ContactPayload, request: Request): string {
